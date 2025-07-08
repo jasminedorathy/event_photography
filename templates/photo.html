@@ -14,7 +14,7 @@
                     
                     <!-- Photo -->
                     <div class="text-center mb-4">
-                        <img src="{{ url_for('static', filename='images/' + photo.filename) }}" 
+                        <img src="{{ url_for('uploaded_file', filename=photo.filename) }}" 
                              class="img-fluid rounded shadow-lg" 
                              alt="{{ photo.title }}"
                              style="max-height: 600px; border-radius: 15px;">
