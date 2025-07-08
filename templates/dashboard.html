@@ -1,71 +1,145 @@
 {% extends "base.html" %}
 
-{% block title %}Dashboard - Event Photography Portal{% endblock %}
+{% block title %}Dashboard - PhotoSphere{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row mb-4">
-        <div class="col-lg-12">
-            <h1><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
-            <p class="lead">Welcome back, {{ current_user.username }}!</p>
-        </div>
-    </div>
-
-    <!-- Quick Actions -->
-    <div class="row mb-4">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5><i class="fas fa-bolt"></i> Quick Actions</h5>
+<div class="container-fluid p-0">
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-5 mb-5" data-aos="fade-in">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-3">
+                        <i class="fas fa-tachometer-alt me-3"></i>Welcome back, {{ current_user.username }}!
+                    </h1>
+                    <p class="lead mb-4">Manage your photography portfolio with style and efficiency</p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <button class="btn btn-light btn-lg px-4" data-bs-toggle="modal" data-bs-target="#createAlbumModal">
+                            <i class="fas fa-plus me-2"></i>Create Album
+                        </button>
+                        <button class="btn btn-outline-light btn-lg px-4" data-bs-toggle="modal" data-bs-target="#uploadPhotosModal">
+                            <i class="fas fa-cloud-upload-alt me-2"></i>Upload Photos
+                        </button>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#createAlbumModal">
-                        <i class="fas fa-plus"></i> Create Album
-                    </button>
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#uploadPhotosModal">
-                        <i class="fas fa-cloud-upload-alt"></i> Upload Photos
-                    </button>
+                <div class="col-lg-4 text-center">
+                    <div class="glass-card p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-user-circle fa-3x text-white"></i>
+                        </div>
+                        <h5 class="fw-bold">{{ current_user.username }}</h5>
+                        <p class="text-muted mb-0">{{ current_user.role|title }} Member</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+</div>
+
+<div class="container">
+
+    <!-- Quick Stats -->
+    <section class="py-5" data-aos="fade-up">
+        <div class="row g-4 mb-5">
+            <div class="col-lg-3 col-md-6">
+                <div class="glass-card p-4 text-center">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-images fa-2x text-white"></i>
+                    </div>
+                    <h3 class="fw-bold mb-2">{{ user_albums|length }}</h3>
+                    <p class="text-muted mb-0">My Albums</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="glass-card p-4 text-center">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-camera fa-2x text-white"></i>
+                    </div>
+                    <h3 class="fw-bold mb-2">{{ user_photos|length }}</h3>
+                    <p class="text-muted mb-0">Photos Uploaded</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="glass-card p-4 text-center">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-eye fa-2x text-white"></i>
+                    </div>
+                    <h3 class="fw-bold mb-2">{{ recent_albums|length }}</h3>
+                    <p class="text-muted mb-0">Public Albums</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="glass-card p-4 text-center">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-comments fa-2x text-white"></i>
+                    </div>
+                    <h3 class="fw-bold mb-2">{{ recent_photos|length }}</h3>
+                    <p class="text-muted mb-0">Recent Photos</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- My Albums -->
-    <div class="row mb-4">
-        <div class="col-lg-12">
-            <h3><i class="fas fa-folder"></i> My Albums</h3>
-            {% if user_albums %}
-            <div class="row">
-                {% for album in user_albums %}
-                <div class="col-md-6 col-lg-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ album.title }}</h5>
-                            <p class="card-text">{{ album.description[:80] }}{% if album.description|length > 80 %}...{% endif %}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">
-                                    <i class="fas fa-images"></i> {{ album.photos|length }} photos
-                                </small>
-                                <span class="badge bg-{{ 'success' if album.visibility == 'public' else 'secondary' }}">
-                                    {{ album.visibility }}
-                                </span>
+    <section class="py-5" data-aos="fade-up">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">
+                <i class="fas fa-folder me-3"></i>My Albums
+            </h2>
+            <p class="lead text-muted">Your personal photography collections</p>
+        </div>
+        
+        {% if user_albums %}
+        <div class="row g-4">
+            {% for album in user_albums %}
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="{{ loop.index * 100 }}">
+                <div class="glass-card h-100">
+                    <div class="p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="feature-icon me-3" style="width: 60px; height: 60px;">
+                                <i class="fas fa-folder-open text-white"></i>
                             </div>
-                            <a href="{{ url_for('view_album', album_id=album.id) }}" class="btn btn-primary btn-sm mt-2">
+                            <span class="badge bg-{{ 'success' if album.visibility == 'public' else 'secondary' }} fs-6">
+                                <i class="fas fa-{{ 'globe' if album.visibility == 'public' else 'lock' }}"></i>
+                                {{ album.visibility }}
+                            </span>
+                        </div>
+                        <h5 class="fw-bold mb-3">{{ album.title }}</h5>
+                        <p class="text-muted mb-3">{{ album.description[:80] }}{% if album.description|length > 80 %}...{% endif %}</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="text-muted">
+                                <i class="fas fa-images me-2"></i>{{ album.photos|length }} photos
+                            </div>
+                            <div class="text-muted">
+                                <i class="fas fa-calendar me-2"></i>{{ album.created_at.strftime('%b %d') }}
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <a href="{{ url_for('view_album', album_id=album.id) }}" class="btn btn-gradient flex-fill">
                                 <i class="fas fa-eye"></i> View
+                            </a>
+                            <a href="{{ url_for('upload_photo') }}?album_id={{ album.id }}" class="btn btn-outline-primary">
+                                <i class="fas fa-plus"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
             </div>
-            {% else %}
-            <div class="alert alert-info">
-                <i class="fas fa-info-circle"></i> You haven't created any albums yet. 
-                <a href="#" data-bs-toggle="modal" data-bs-target="#createAlbumModal">Create your first album</a>!
-            </div>
-            {% endif %}
+            {% endfor %}
         </div>
-    </div>
+        {% else %}
+        <div class="text-center">
+            <div class="glass-card d-inline-block p-5">
+                <i class="fas fa-folder-plus fa-3x text-primary mb-3"></i>
+                <h4 class="fw-bold mb-3">Create Your First Album</h4>
+                <p class="text-muted mb-4">Start organizing your photos into beautiful collections</p>
+                <button class="btn btn-gradient btn-lg px-4" data-bs-toggle="modal" data-bs-target="#createAlbumModal">
+                    <i class="fas fa-plus me-2"></i>Create Album
+                </button>
+            </div>
+        </div>
+        {% endif %}
+    </section>
 
     <!-- Public Albums -->
     <div class="row">

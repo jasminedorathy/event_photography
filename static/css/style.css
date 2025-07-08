@@ -227,6 +227,138 @@ h1, h2, h3, h4, h5, h6 {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Mobile Responsive Enhancements */
+@media (max-width: 768px) {
+    .display-3 {
+        font-size: 2.5rem;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .display-5 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-gradient {
+        padding: 3rem 0;
+    }
+    
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .glass-card {
+        margin: 1rem 0;
+    }
+    
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+    
+    .input-group-lg .form-control {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .hero-gradient {
+        padding: 2rem 0;
+    }
+    
+    .display-3, .display-4 {
+        font-size: 1.8rem;
+    }
+    
+    .lead {
+        font-size: 1.1rem;
+    }
+    
+    .feature-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .btn {
+        padding: 0.5rem 1rem;
+    }
+    
+    .glass-card {
+        padding: 1.5rem !important;
+    }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+    .glass-card:hover {
+        transform: none;
+    }
+    
+    .feature-icon:hover {
+        transform: none;
+    }
+    
+    .btn-gradient:hover {
+        transform: none;
+    }
+    
+    .image-hover-effect:hover img {
+        transform: none;
+    }
+}
+
+/* Enhanced form styling */
+.form-control:focus {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+.input-group-text {
+    transition: all 0.3s ease;
+}
+
+.form-control:focus + .input-group-text,
+.form-control:focus ~ .input-group-text {
+    border-color: var(--bs-primary);
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Print styles */
+@media print {
+    .hero-gradient,
+    .navbar,
+    .btn,
+    .glass-card {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .feature-icon {
+        background: #ccc !important;
+    }
+}
+
 /* Upload drop zone */
 #dropZone {
     border: 2px dashed var(--bs-border-color);

@@ -1,0 +1,39 @@
+# Database
+*.db
+instance/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+
+# Uploads (keep sample images for demo)
+uploads/*.jpg
+uploads/*.png
+uploads/*.jpeg
+uploads/*.gif
+!uploads/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment variables
+.env.local
+.env.development
+.env.production
+
+# Dependencies
+node_modules/
