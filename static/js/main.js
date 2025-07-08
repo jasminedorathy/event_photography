@@ -1,4 +1,4 @@
-// Main JavaScript file for Event Photography Portal
+// Main JavaScript file for PhotoSphere - Professional Event Photography Portal
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize AOS (Animate On Scroll)
@@ -6,9 +6,17 @@ document.addEventListener('DOMContentLoaded', function() {
         AOS.init({
             duration: 1000,
             once: true,
-            offset: 100
+            offset: 100,
+            easing: 'ease-out-cubic'
         });
     }
+
+    // Reinitialize AOS on AJAX content load
+    window.refreshAOS = function() {
+        if (typeof AOS !== 'undefined') {
+            AOS.refresh();
+        }
+    };
 
     // Initialize tooltips
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -63,14 +71,23 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateScrollIndicator() {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        const indicator = document.getElementById('scrollIndicator');
-        if (indicator) {
-            indicator.style.transform = `scaleX(${scrolled / 100})`;
+        if (height > 0) {
+            const scrolled = (winScroll / height) * 100;
+            const indicator = document.getElementById('scrollIndicator');
+            if (indicator) {
+                indicator.style.transform = `scaleX(${Math.min(scrolled / 100, 1)})`;
+            }
         }
     }
 
-    window.addEventListener('scroll', updateScrollIndicator);
+    // Throttle scroll events for better performance
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        if (scrollTimeout) {
+            cancelAnimationFrame(scrollTimeout);
+        }
+        scrollTimeout = requestAnimationFrame(updateScrollIndicator);
+    });
 
     // Smooth scrolling enhancement
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -96,12 +113,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const parallaxElements = document.querySelectorAll('.hero-gradient');
         
         parallaxElements.forEach(element => {
-            const speed = 0.5;
-            element.style.transform = `translateY(${scrolled * speed}px)`;
+            const speed = 0.3;
+            const yPos = -(scrolled * speed);
+            element.style.transform = `translateY(${yPos}px)`;
         });
     }
 
-    window.addEventListener('scroll', parallaxScroll);
+    // Throttle parallax for better performance
+    let parallaxTimeout;
+    window.addEventListener('scroll', function() {
+        if (parallaxTimeout) {
+            cancelAnimationFrame(parallaxTimeout);
+        }
+        parallaxTimeout = requestAnimationFrame(parallaxScroll);
+    });
 
     // Image lazy loading enhancement
     if ('IntersectionObserver' in window) {
@@ -296,6 +321,102 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Service Worker registration failed');
         });
     }
+
+    // Enhanced form animations
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        const inputs = form.querySelectorAll('.form-control, .form-select');
+        
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('form-focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('form-focused');
+            });
+        });
+    });
+
+    // Enhanced card hover effects
+    const cards = document.querySelectorAll('.card, .glass-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+
+    // Photo gallery hover effects
+    const photoItems = document.querySelectorAll('.photo-item');
+    photoItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            const img = this.querySelector('img');
+            if (img) {
+                img.style.transform = 'scale(1.1)';
+            }
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            const img = this.querySelector('img');
+            if (img) {
+                img.style.transform = 'scale(1)';
+            }
+        });
+    });
+
+    // Button click animations
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            let ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            this.appendChild(ripple);
+            
+            let x = e.clientX - e.target.offsetLeft;
+            let y = e.clientY - e.target.offsetTop;
+            
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+
+    // Add ripple effect CSS
+    const rippleStyle = document.createElement('style');
+    rippleStyle.textContent = `
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        .form-focused {
+            transform: scale(1.02);
+            transition: transform 0.2s ease;
+        }
+    `;
+    document.head.appendChild(rippleStyle);
 
     // Check online status
     window.addEventListener('online', function() {
