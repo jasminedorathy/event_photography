@@ -269,6 +269,10 @@ def uploaded_file(filename):
 def thumbnail_file(filename):
     return send_from_directory(app.config['THUMBNAIL_FOLDER'], filename)
 
+@app.route('/static/images/<filename>')
+def static_image(filename):
+    return send_from_directory('static/images', filename)
+
 # Error handlers
 @app.errorhandler(404)
 def not_found(error):

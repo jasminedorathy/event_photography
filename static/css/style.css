@@ -557,6 +557,15 @@ section {
     transform: scale(1.05);
 }
 
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.glass-card:hover .gallery-image {
+    transform: scale(1.05);
+}
+
 /* Comment section */
 .comment {
     background-color: var(--bs-light-bg-subtle);

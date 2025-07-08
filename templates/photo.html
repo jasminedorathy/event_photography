@@ -7,17 +7,17 @@
     <div class="row">
         <!-- Photo Display -->
         <div class="col-lg-8">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h2>{{ photo.title }}</h2>
-                    <p class="text-muted">{{ photo.description }}</p>
+            <div class="glass-card mb-4" data-aos="fade-up">
+                <div class="p-4">
+                    <h2 class="fw-bold mb-3">{{ photo.title }}</h2>
+                    <p class="text-muted mb-4">{{ photo.description }}</p>
                     
                     <!-- Photo -->
-                    <div class="text-center mb-3">
-                        <img src="{{ url_for('uploaded_file', filename=photo.filename) }}" 
-                             class="img-fluid rounded" 
+                    <div class="text-center mb-4">
+                        <img src="{{ url_for('static', filename='images/' + photo.filename) }}" 
+                             class="img-fluid rounded shadow-lg" 
                              alt="{{ photo.title }}"
-                             style="max-height: 600px;">
+                             style="max-height: 600px; border-radius: 15px;">
                     </div>
                     
                     <!-- Photo Info -->
@@ -53,43 +53,51 @@
 
         <!-- Comments Section -->
         <div class="col-lg-4">
-            <div class="card">
-                <div class="card-header">
-                    <h5><i class="fas fa-comments"></i> Comments</h5>
-                </div>
-                <div class="card-body">
+            <div class="glass-card h-100" data-aos="fade-left">
+                <div class="p-4">
+                    <h5 class="fw-bold mb-4">
+                        <i class="fas fa-comments me-2"></i>Comments ({{ comments|length }})
+                    </h5>
+                    
                     <!-- Add Comment Form -->
                     {% if current_user.is_authenticated %}
                     <form method="POST" action="{{ url_for('add_comment') }}" class="mb-4">
                         <input type="hidden" name="photo_id" value="{{ photo.id }}">
                         <div class="mb-3">
-                            <textarea class="form-control" name="comment_text" rows="3" placeholder="Write a comment..." required></textarea>
+                            <textarea name="comment_text" class="form-control" rows="3" 
+                                      placeholder="Add a comment..." required
+                                      style="border-radius: 10px; border: 2px solid rgba(255,255,255,0.1);"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-sm">
-                            <i class="fas fa-paper-plane"></i> Post Comment
+                        <button type="submit" class="btn btn-gradient w-100">
+                            <i class="fas fa-paper-plane me-2"></i>Post Comment
                         </button>
                     </form>
                     {% else %}
-                    <p class="text-muted">
-                        <a href="{{ url_for('login') }}">Login</a> to leave a comment.
-                    </p>
+                    <div class="alert alert-info">
+                        <a href="{{ url_for('login') }}">Login</a> to add comments.
+                    </div>
                     {% endif %}
 
                     <!-- Comments List -->
-                    <div class="comments-list">
+                    <div class="comments-list" style="max-height: 400px; overflow-y: auto;">
                         {% for comment in comments %}
-                        <div class="comment mb-3 p-3 border rounded">
+                        <div class="comment mb-3 p-3 glass-card" data-aos="fade-up" data-aos-delay="{{ loop.index * 50 }}">
                             <div class="d-flex justify-content-between align-items-start">
                                 <div class="flex-grow-1">
-                                    <h6 class="mb-1">
-                                        <i class="fas fa-user"></i> {{ comment.author.username }}
-                                        {% if comment.author.role == 'admin' %}
-                                        <span class="badge bg-warning">Admin</span>
-                                        {% endif %}
-                                    </h6>
-                                    <p class="mb-1">{{ comment.comment_text }}</p>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px;">
+                                            <i class="fas fa-user text-white fs-6"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0">{{ comment.author.username }}</h6>
+                                            {% if comment.author.role == 'admin' %}
+                                            <span class="badge bg-warning">Admin</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <p class="mb-2">{{ comment.comment_text }}</p>
                                     <small class="text-muted">
-                                        <i class="fas fa-clock"></i> {{ comment.created_at.strftime('%B %d, %Y at %I:%M %p') }}
+                                        <i class="fas fa-clock me-1"></i>{{ comment.created_at.strftime('%B %d, %Y at %I:%M %p') }}
                                     </small>
                                 </div>
                                 {% if current_user.is_authenticated and (current_user.id == comment.user_id or current_user.role == 'admin') %}
@@ -104,10 +112,10 @@
                         {% endfor %}
                         
                         {% if not comments %}
-                        <p class="text-muted text-center">
-                            <i class="fas fa-comment-slash"></i><br>
-                            No comments yet. Be the first to comment!
-                        </p>
+                        <div class="text-center py-4">
+                            <i class="fas fa-comment-slash fa-3x text-muted mb-3"></i>
+                            <p class="text-muted">No comments yet. Be the first to comment!</p>
+                        </div>
                         {% endif %}
                     </div>
                 </div>

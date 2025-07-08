@@ -158,12 +158,27 @@
             {% for album in recent_albums %}
             <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="{{ loop.index * 100 }}">
                 <div class="glass-card h-100">
+                    {% if album.photos and album.photos|length > 0 %}
+                    <div class="position-relative" style="height: 200px; overflow: hidden; border-radius: 15px 15px 0 0;">
+                        <img src="{{ url_for('static', filename='images/' + (album.photos[0].filename if album.photos else 'placeholder.svg')) }}" 
+                             alt="{{ album.title }}" 
+                             class="w-100 h-100" 
+                             style="object-fit: cover; transition: transform 0.3s ease;" 
+                             onmouseover="this.style.transform='scale(1.05)'" 
+                             onmouseout="this.style.transform='scale(1)'">
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <span class="badge bg-dark bg-opacity-75">
+                                <i class="fas fa-images me-1"></i>{{ album.photos|length }}
+                            </span>
+                        </div>
+                    </div>
+                    {% endif %}
                     <div class="p-4">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="feature-icon me-3" style="width: 50px; height: 50px;">
+                            <div class="feature-icon me-3" style="width: 40px; height: 40px;">
                                 <i class="fas fa-folder text-primary"></i>
                             </div>
-                            <div>
+                            <div class="flex-grow-1">
                                 <h5 class="fw-bold mb-0">{{ album.title }}</h5>
                                 <small class="text-muted">{{ album.photos|length }} photos</small>
                             </div>
@@ -177,7 +192,7 @@
                                 <small class="text-muted">{{ album.creator.username }}</small>
                             </div>
                             <a href="{{ url_for('view_album', album_id=album.id) }}" class="btn btn-sm btn-gradient">
-                                <i class="fas fa-eye"></i> View
+                                <i class="fas fa-eye me-1"></i>View
                             </a>
                         </div>
                     </div>
