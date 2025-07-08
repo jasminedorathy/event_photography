@@ -84,3 +84,29 @@ python -c "from app import app, db; app.app_context().push(); db.create_all()"
 
 # Run development server
 python main.py
+
+### 🏗️ Project Structure
+text
+photosphere/
+├── app.py                 # Main application entry
+├── config.py              # Configuration settings
+├── requirements.txt       # Python dependencies
+├── static/                # Static assets
+│   ├── css/               # Stylesheets
+│   ├── js/                # JavaScript files
+│   └── images/            # Static images
+├── templates/             # Jinja2 templates
+│   ├── base.html          # Base template
+│   ├── dashboard.html     # User dashboard
+│   └── admin/             # Admin templates
+├── uploads/               # User uploads
+│   └── thumbnails/        # Generated thumbnails
+└── README.md              # Project documentation
+
+Access the application at: http://localhost:5000
+
+## Default Admin Credentials:
+
+Username: admin
+
+Password: admin123
