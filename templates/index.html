@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <div class="bg-primary text-white p-5 rounded-3 text-center">
+                <h1 class="display-4 fw-bold mb-3">
+                    <i class="fas fa-camera"></i> Event Photography Portal
+                </h1>
+                <p class="lead mb-4">
+                    Share your event memories with the world. Upload photos, create albums, and engage with the community.
+                </p>
+                {% if not current_user.is_authenticated %}
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <a href="{{ url_for('register') }}" class="btn btn-light btn-lg px-4 me-sm-3">
+                        <i class="fas fa-user-plus"></i> Get Started
+                    </a>
+                    <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-lg px-4">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                </div>
+                {% else %}
+                <a href="{{ url_for('dashboard') }}" class="btn btn-light btn-lg px-4">
+                    <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <h2 class="text-center mb-4">Why Choose Our Portal?</h2>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Easy Upload</h5>
+                    <p class="card-text">Drag and drop multiple photos with our intuitive upload interface.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-images fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Organize Albums</h5>
+                    <p class="card-text">Create and manage albums for different events and occasions.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-comments fa-3x text-info mb-3"></i>
+                    <h5 class="card-title">Engage Community</h5>
+                    <p class="card-text">Comment on photos and interact with other photography enthusiasts.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Albums -->
+    {% if recent_albums %}
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <h2 class="mb-4">Recent Albums</h2>
+        </div>
+        {% for album in recent_albums %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-folder"></i> {{ album.title }}
+                    </h5>
+                    <p class="card-text">{{ album.description[:100] }}{% if album.description|length > 100 %}...{% endif %}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">
+                            <i class="fas fa-user"></i> {{ album.creator.username }}
+                        </small>
+                        <small class="text-muted">
+                            <i class="fas fa-images"></i> {{ album.photos|length }} photos
+                        </small>
+                    </div>
+                    <a href="{{ url_for('view_album', album_id=album.id) }}" class="btn btn-primary btn-sm mt-2">
+                        <i class="fas fa-eye"></i> View Album
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Call to Action -->
+    {% if not current_user.is_authenticated %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="bg-secondary text-white p-4 rounded-3 text-center">
+                <h3 class="mb-3">Ready to Start Sharing?</h3>
+                <p class="mb-4">Join our photography community today and start sharing your amazing event photos!</p>
+                <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-rocket"></i> Create Account
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
