@@ -1,8 +1,8 @@
-# Event Photography Upload and Commenting Portal
+# PhotoSphere - Professional Event Photography Portal
 
 ## Overview
 
-This is a comprehensive Flask-based web application for event photography management. It provides a platform for users to upload, organize, and share photos with community engagement features through comments and albums. The application supports both user and admin roles with appropriate access controls.
+PhotoSphere is a cutting-edge, professional-grade Flask web application designed for event photography management and community engagement. The platform features modern glassmorphism design, smooth animations, and comprehensive photo management capabilities. Built with Python Flask backend, Bootstrap 5 frontend, and SQLAlchemy ORM, it demonstrates full-stack development excellence suitable for job interviews and professional portfolios.
 
 ## System Architecture
 
@@ -105,9 +105,29 @@ This is a comprehensive Flask-based web application for event photography manage
 - Secure session key management
 - Database connection pooling
 
-## Changelog
-- July 08, 2025. Initial setup
+## Recent Changes
+
+### July 08, 2025 - Major Enhancement Update
+- **Rebranded to PhotoSphere**: Professional naming for job interview appeal
+- **Enhanced UI/UX**: Added glassmorphism design with smooth animations
+- **Advanced Typography**: Integrated Google Fonts (Poppins + Playfair Display)
+- **Animation Library**: Added AOS (Animate On Scroll) for smooth transitions
+- **Interactive Features**: Implemented animated counters, scroll indicators, and parallax effects
+- **Modern Design Elements**: Gradient buttons, testimonial cards, and feature icons
+- **Comprehensive Documentation**: Created detailed README with VS Code setup instructions
+- **Professional Branding**: Updated navigation, footer, and overall visual identity
+
+### Technical Improvements
+- **Enhanced JavaScript**: Added modern ES6+ features with smooth animations
+- **CSS Enhancements**: Professional glassmorphism effects and responsive design
+- **Performance Optimizations**: Lazy loading and image optimization
+- **Mobile Responsiveness**: Touch-optimized interfaces and swipe gestures
+- **Security Features**: Input validation and file upload protection
 
 ## User Preferences
 
-Preferred communication style: Simple, everyday language.
+- **Communication Style**: Simple, everyday language
+- **Project Focus**: Professional portfolio quality for Python developer job interviews
+- **Design Preference**: Modern, attractive UI with professional animations
+- **Technology Stack**: Python Flask backend, vanilla JavaScript frontend, MySQL database support
+- **Development Environment**: VS Code with detailed setup instructions

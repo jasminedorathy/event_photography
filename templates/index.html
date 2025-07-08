@@ -1,114 +1,303 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
+<!-- Scroll Indicator -->
+<div class="scroll-indicator" id="scrollIndicator"></div>
+
+<div class="container-fluid p-0">
     <!-- Hero Section -->
-    <div class="row mb-5">
-        <div class="col-lg-12">
-            <div class="bg-primary text-white p-5 rounded-3 text-center">
-                <h1 class="display-4 fw-bold mb-3">
-                    <i class="fas fa-camera"></i> Event Photography Portal
-                </h1>
-                <p class="lead mb-4">
-                    Share your event memories with the world. Upload photos, create albums, and engage with the community.
-                </p>
-                {% if not current_user.is_authenticated %}
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    <a href="{{ url_for('register') }}" class="btn btn-light btn-lg px-4 me-sm-3">
-                        <i class="fas fa-user-plus"></i> Get Started
+    <section class="hero-gradient text-white py-5" data-aos="fade-in">
+        <div class="container">
+            <div class="row align-items-center min-vh-75">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1 class="display-3 fw-bold mb-4">
+                        Welcome to <span class="text-info">PhotoSphere</span>
+                    </h1>
+                    <p class="lead mb-4 fs-5">
+                        Capture, Share, and Celebrate Life's Precious Moments. 
+                        The ultimate platform for professional event photography management.
+                    </p>
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            <span>Professional-grade photo management</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            <span>Advanced album organization</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            <span>Real-time community engagement</span>
+                        </div>
+                    </div>
+                    {% if not current_user.is_authenticated %}
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="{{ url_for('register') }}" class="btn btn-gradient btn-lg px-4 py-3">
+                            <i class="fas fa-rocket me-2"></i>Start Your Journey
+                        </a>
+                        <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-lg px-4 py-3">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login
+                        </a>
+                    </div>
+                    {% else %}
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-gradient btn-lg px-4 py-3">
+                        <i class="fas fa-tachometer-alt me-2"></i>Go to Dashboard
                     </a>
-                    <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-lg px-4">
-                        <i class="fas fa-sign-in-alt"></i> Login
-                    </a>
+                    {% endif %}
                 </div>
-                {% else %}
-                <a href="{{ url_for('dashboard') }}" class="btn btn-light btn-lg px-4">
-                    <i class="fas fa-tachometer-alt"></i> Go to Dashboard
-                </a>
-                {% endif %}
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="text-center">
+                        <div class="image-hover-effect d-inline-block">
+                            <svg width="400" height="300" viewBox="0 0 400 300" class="img-fluid">
+                                <defs>
+                                    <linearGradient id="cameraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#0d6efd;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#0dcaf0;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <rect width="400" height="300" fill="none"/>
+                                <g transform="translate(100, 75)">
+                                    <!-- Camera body -->
+                                    <rect x="20" y="60" width="160" height="100" rx="10" fill="url(#cameraGrad)" opacity="0.9"/>
+                                    <!-- Lens -->
+                                    <circle cx="100" cy="110" r="40" fill="#fff" opacity="0.9"/>
+                                    <circle cx="100" cy="110" r="30" fill="url(#cameraGrad)" opacity="0.8"/>
+                                    <circle cx="100" cy="110" r="15" fill="#000" opacity="0.9"/>
+                                    <!-- Flash -->
+                                    <rect x="140" y="70" width="20" height="10" rx="5" fill="#fff" opacity="0.9"/>
+                                    <!-- Photos floating -->
+                                    <rect x="0" y="20" width="40" height="30" rx="5" fill="#fff" opacity="0.8" transform="rotate(-15 20 35)"/>
+                                    <rect x="160" y="30" width="40" height="30" rx="5" fill="#fff" opacity="0.8" transform="rotate(10 180 45)"/>
+                                    <rect x="30" y="0" width="40" height="30" rx="5" fill="#fff" opacity="0.8" transform="rotate(-5 50 15)"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+</div>
+
+<div class="container">
+    <!-- Statistics Section -->
+    <section class="py-5" data-aos="fade-up">
+        <div class="row text-center">
+            <div class="col-md-3 mb-4">
+                <div class="glass-card p-4">
+                    <div class="stat-number" data-count="1000">0</div>
+                    <h6>Photos Uploaded</h6>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="glass-card p-4">
+                    <div class="stat-number" data-count="250">0</div>
+                    <h6>Albums Created</h6>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="glass-card p-4">
+                    <div class="stat-number" data-count="500">0</div>
+                    <h6>Happy Users</h6>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="glass-card p-4">
+                    <div class="stat-number" data-count="2500">0</div>
+                    <h6>Comments Posted</h6>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Features Section -->
-    <div class="row mb-5">
-        <div class="col-lg-12">
-            <h2 class="text-center mb-4">Why Choose Our Portal?</h2>
+    <section class="py-5" data-aos="fade-up">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">Why Choose PhotoSphere?</h2>
+            <p class="lead text-muted">Experience the future of event photography management</p>
         </div>
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body text-center">
-                    <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
-                    <h5 class="card-title">Easy Upload</h5>
-                    <p class="card-text">Drag and drop multiple photos with our intuitive upload interface.</p>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                <div class="glass-card h-100 p-4 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud-upload-alt fa-2x text-white"></i>
+                    </div>
+                    <h5 class="fw-bold mb-3">Seamless Upload</h5>
+                    <p class="text-muted">Advanced drag-and-drop interface with batch processing and real-time preview.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                <div class="glass-card h-100 p-4 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-layer-group fa-2x text-white"></i>
+                    </div>
+                    <h5 class="fw-bold mb-3">Smart Organization</h5>
+                    <p class="text-muted">AI-powered album creation with automatic categorization and smart tagging.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                <div class="glass-card h-100 p-4 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-users fa-2x text-white"></i>
+                    </div>
+                    <h5 class="fw-bold mb-3">Community Hub</h5>
+                    <p class="text-muted">Real-time collaboration with photographers and event attendees worldwide.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+                <div class="glass-card h-100 p-4 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt fa-2x text-white"></i>
+                    </div>
+                    <h5 class="fw-bold mb-3">Secure Storage</h5>
+                    <p class="text-muted">Enterprise-grade security with encrypted storage and privacy controls.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
+                <div class="glass-card h-100 p-4 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt fa-2x text-white"></i>
+                    </div>
+                    <h5 class="fw-bold mb-3">Mobile Ready</h5>
+                    <p class="text-muted">Responsive design optimized for all devices with offline capabilities.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="600">
+                <div class="glass-card h-100 p-4 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line fa-2x text-white"></i>
+                    </div>
+                    <h5 class="fw-bold mb-3">Analytics Dashboard</h5>
+                    <p class="text-muted">Detailed insights and engagement metrics for professional photographers.</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body text-center">
-                    <i class="fas fa-images fa-3x text-success mb-3"></i>
-                    <h5 class="card-title">Organize Albums</h5>
-                    <p class="card-text">Create and manage albums for different events and occasions.</p>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5" data-aos="fade-up">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">What Our Users Say</h2>
+            <p class="lead text-muted">Join thousands of satisfied photographers and event organizers</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 mb-4" data-aos="fade-right">
+                <div class="testimonial-card h-100">
+                    <p class="mb-4">PhotoSphere transformed how I manage my wedding photography business. The client engagement features are incredible!</p>
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="fas fa-user text-white"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h6 class="mb-0">Sarah Johnson</h6>
+                            <small class="text-muted">Wedding Photographer</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4" data-aos="fade-up">
+                <div class="testimonial-card h-100">
+                    <p class="mb-4">Finally, a platform that understands event photography. The album organization and sharing features are perfect for corporate events.</p>
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <div class="rounded-circle bg-info d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="fas fa-user text-white"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h6 class="mb-0">Michael Chen</h6>
+                            <small class="text-muted">Event Coordinator</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4" data-aos="fade-left">
+                <div class="testimonial-card h-100">
+                    <p class="mb-4">The user interface is intuitive and the mobile experience is seamless. I can manage my photo galleries on the go!</p>
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <div class="rounded-circle bg-success d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="fas fa-user text-white"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h6 class="mb-0">Emily Rodriguez</h6>
+                            <small class="text-muted">Freelance Photographer</small>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body text-center">
-                    <i class="fas fa-comments fa-3x text-info mb-3"></i>
-                    <h5 class="card-title">Engage Community</h5>
-                    <p class="card-text">Comment on photos and interact with other photography enthusiasts.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    </section>
 
     <!-- Recent Albums -->
     {% if recent_albums %}
-    <div class="row mb-5">
-        <div class="col-lg-12">
-            <h2 class="mb-4">Recent Albums</h2>
+    <section class="py-5" data-aos="fade-up">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">Featured Albums</h2>
+            <p class="lead text-muted">Explore curated collections from our community</p>
         </div>
-        {% for album in recent_albums %}
-        <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <i class="fas fa-folder"></i> {{ album.title }}
-                    </h5>
-                    <p class="card-text">{{ album.description[:100] }}{% if album.description|length > 100 %}...{% endif %}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <small class="text-muted">
-                            <i class="fas fa-user"></i> {{ album.creator.username }}
-                        </small>
-                        <small class="text-muted">
-                            <i class="fas fa-images"></i> {{ album.photos|length }} photos
-                        </small>
+        <div class="row g-4">
+            {% for album in recent_albums %}
+            <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="{{ loop.index * 100 }}">
+                <div class="glass-card h-100">
+                    <div class="p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="feature-icon me-3" style="width: 50px; height: 50px;">
+                                <i class="fas fa-folder text-white"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-0">{{ album.title }}</h5>
+                                <small class="text-muted">{{ album.photos|length }} photos</small>
+                            </div>
+                        </div>
+                        <p class="text-muted mb-3">{{ album.description[:80] }}{% if album.description|length > 80 %}...{% endif %}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center me-2" style="width: 30px; height: 30px;">
+                                    <i class="fas fa-user text-white fs-6"></i>
+                                </div>
+                                <small class="text-muted">{{ album.creator.username }}</small>
+                            </div>
+                            <a href="{{ url_for('view_album', album_id=album.id) }}" class="btn btn-sm btn-gradient">
+                                <i class="fas fa-eye"></i> View
+                            </a>
+                        </div>
                     </div>
-                    <a href="{{ url_for('view_album', album_id=album.id) }}" class="btn btn-primary btn-sm mt-2">
-                        <i class="fas fa-eye"></i> View Album
-                    </a>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
+    </section>
     {% endif %}
 
     <!-- Call to Action -->
-    {% if not current_user.is_authenticated %}
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="bg-secondary text-white p-4 rounded-3 text-center">
-                <h3 class="mb-3">Ready to Start Sharing?</h3>
-                <p class="mb-4">Join our photography community today and start sharing your amazing event photos!</p>
-                <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">
-                    <i class="fas fa-rocket"></i> Create Account
-                </a>
+    <section class="py-5 hero-gradient text-white" data-aos="fade-up">
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="display-4 fw-bold mb-4">Ready to Transform Your Photography Experience?</h2>
+                    <p class="lead mb-4">Join thousands of photographers and event organizers who trust PhotoSphere for their professional needs.</p>
+                    {% if not current_user.is_authenticated %}
+                    <div class="d-flex gap-3 justify-content-center flex-wrap">
+                        <a href="{{ url_for('register') }}" class="btn btn-light btn-lg px-5 py-3">
+                            <i class="fas fa-rocket me-2"></i>Get Started Free
+                        </a>
+                        <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-lg px-5 py-3">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login
+                        </a>
+                    </div>
+                    {% else %}
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-light btn-lg px-5 py-3">
+                        <i class="fas fa-tachometer-alt me-2"></i>Access Dashboard
+                    </a>
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
-    {% endif %}
+    </section>
 </div>
 {% endblock %}

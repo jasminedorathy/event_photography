@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found - PhotoSphere{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="text-center">
+                <div class="error-image mb-4">
+                    <i class="fas fa-camera-retro fa-5x text-muted"></i>
+                </div>
+                <h1 class="display-1 fw-bold text-primary">404</h1>
+                <h2 class="h4 mb-3">Picture Not Found</h2>
+                <p class="lead text-muted mb-4">
+                    Oops! The page you're looking for seems to have disappeared from our gallery.
+                    Maybe it was moved to a different album?
+                </p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-home"></i> Back to Home
+                    </a>
+                    <a href="{{ url_for('dashboard') if current_user.is_authenticated else url_for('login') }}" class="btn btn-outline-secondary btn-lg">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
