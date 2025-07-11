@@ -110,9 +110,9 @@ Password: admin123
 
 ## 📸 Screenshots
 
-(https://github.com/jasminedorathy/event_photography/blob/main/attached_assets/image.png)
-(https://github.com/jasminedorathy/event_photography/blob/main/attached_assets/image1.png)
-(https://github.com/jasminedorathy/event_photography/blob/main/attached_assets/image2.png)
+(https://github.com/jasminedorathy/event_photography/attached_assets/image.png)
+(https://github.com/jasminedorathy/event_photography/attached_assets/image1.png)
+(https://github.com/jasminedorathy/event_photography/attached_assets/image2.png)
 
 
 
