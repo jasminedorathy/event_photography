@@ -1,8 +1,5 @@
 # 📸 PhotoSphere - Professional Event Photography Portal
 
-![Dashboard Preview](screenshots/dashboard.png)
-![Gallery Preview](screenshots/gallery.png)
-
 A full-stack web application for professional event photography management with modern features and secure architecture.
 
 ## 🌟 Key Features
@@ -110,8 +107,5 @@ Access the application at: http://localhost:5000
 Username: admin
 
 Password: admin123
-
-### SCREENSHOTS
-
 
 
