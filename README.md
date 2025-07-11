@@ -113,7 +113,5 @@ Password: admin123
 
 ### SCREENSHOTS
 
-![image](https://github.com/user-attachments/assets/f4ab10c3-6131-4e6b-bcb2-58ea205237a1)
 
-![image](https://github.com/user-attachments/assets/b76a1ef7-f4e6-468e-8d21-3e58c165cbe5)
 
