@@ -108,4 +108,20 @@ Username: admin
 
 Password: admin123
 
+## 📸 Screenshots
+
+(https://github.com/jasminedorathy/event_photography/blob/main/assets/screenshot1.png)
+(https://github.com/jasminedorathy/event_photography/blob/main/assets/screenshot2.png)
+(https://github.com/jasminedorathy/event_photography/blob/main/assets/screenshot3.png)
+(https://github.com/jasminedorathy/event_photography/blob/main/assets/screenshot4.png)
+(https://github.com/jasminedorathy/event_photography/blob/main/assets/screenshot5.png)
+(https://github.com/jasminedorathy/event_photography/blob/main/assets/screenshot6.png)
+(https://github.com/jasminedorathy/event_photography/blob/main/assets/screenshot7.png)
+(https://github.com/jasminedorathy/event_photography/blob/main/assets/screenshot8.png)
+(https://github.com/jasminedorathy/event_photography/blob/main/assets/screenshot9.png)
+(https://github.com/jasminedorathy/event_photography/blob/main/assets/screenshot10.png)
+(https://github.com/jasminedorathy/event_photography/blob/main/assets/screenshot11.png)
+
+
+
 
